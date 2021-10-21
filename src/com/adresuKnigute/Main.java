@@ -1,7 +1,5 @@
 package com.adresuKnigute;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 class metodai{
@@ -37,9 +35,7 @@ class metodai{
 
     //3. Paieška nurodžius vardą, pavardę ir miestą;
     public void searchByFirstNameAndLastNameAndCity( Adresine knygute, String givenFirstName, String givenLastName, String givenCity){
-//            String givenFirstName = "Jackson";
-//            String givenLastName = "Johnson";
-//            String givenCity = "Kaunas";
+
         boolean notFound1 = true;
         for (Asmuo i : knygute.getAsmenuKontaktai()) {
             if (i.getVardas().equals(givenFirstName) && i.getPavarde().equals(givenLastName) && i.getMiestas().equals(givenCity)) {
@@ -67,7 +63,7 @@ class metodai{
 public class Main {
     public static void main(String[] args) {
 
-//        Asmuo asm = new Asmuo("tomas", "bance", "kns", "+370 670 44112");
+        //        Asmuo asm = new Asmuo("tomas", "bance", "kns", "+370 670 44112");
 //        System.out.println(asm.getMiestas());
 //        asm.createContact();
 //        System.out.println(asm.getMiestas());
@@ -83,7 +79,7 @@ public class Main {
 //            System.out.println(uzrasine.get(i).getVardas());
 //        }
 // generates 100 in adresine
-        Adresine knygute = new Adresine();
+//        Adresine knygute = new Adresine();
 //        for( int i=0; i<10; i++){
 //            Asmuo asmuo = new Asmuo();
 //            knygute.irasytiKontakta(asmuo);
@@ -131,6 +127,8 @@ public class Main {
 //            System.out.println(" Person not found in Adresu knygute");
 //        }
 
+
+        Adresine knygute = new Adresine();
 
         while(true){
             System.out.println("1- Adresatu random sugeneravimas ir perziura \n2- Atvaizduoti Adresine \n3- Nurodytame " +
@@ -194,11 +192,8 @@ public class Main {
             } else if (punktas == 0) {
                 break;
             }
-            }
         }
-
-
-//                    cout << "Adresatu random sugeneravimas ir perziura" << endl;
+        //                    cout << "Adresatu random sugeneravimas ir perziura" << endl;
 //                    randomKontoaktuGeneravimas(*adresuKnyga);
 //                    break;
 //                case 2:
@@ -256,10 +251,9 @@ public class Main {
 //        for( int i=0; i<10; i++){
 //            System.out.println( "irasomi kontaktai: " + knygute.asmenuKontaktai.get(i).getVardas() + " " + knygute.asmenuKontaktai.get(i).getPavarde()
 //            + " " + knygute.asmenuKontaktai.get(i).getMiestas() + " " + knygute.asmenuKontaktai.get(i).getTelefonas()); }
+    }
 
-
-
-  }
+}
 
 
 

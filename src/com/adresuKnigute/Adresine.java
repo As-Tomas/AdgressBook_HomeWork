@@ -1,9 +1,6 @@
 package com.adresuKnigute;
 
 import java.util.ArrayList;
-import java.io.*;
-import java.lang.*;
-import java.util.*;
 
 public class Adresine {
     private
@@ -23,9 +20,6 @@ public class Adresine {
     public void setKontaktuSkaicius(int kiek) {kontaktuSkaicius = kiek;}
     public int getKontaktuSkaicius(){ return kontaktuSkaicius;}
 
-//    Asmuo *getAsmenuKontaktai() {
-//        return asmenuKontaktai;
-//    }
 
     public void irasytiKontakta(Asmuo asmensKontaktas) {
         this.asmenuKontaktai.add(kontaktuSkaicius, asmensKontaktas);
@@ -38,7 +32,7 @@ public class Adresine {
         asmenuKontaktai.get(indekas).setTelefonas("");
         asmenuKontaktai.get(indekas).setMiestas("") ;
     }
-//    void pagalPavarde(){
+    //    void pagalPavarde(){
 //        Arrays.sort(asmenuKontaktai.get().getPavarde());
 //    }
 

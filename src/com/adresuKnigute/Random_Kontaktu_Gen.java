@@ -15,7 +15,7 @@ public class Random_Kontaktu_Gen {
 
     // generate a random number between min and max
 
-    int randomNr(int min, int max) {
+    public int randomNr(int min, int max) {
         int randomNumber;
         do{
             randomNumber = ThreadLocalRandom.current().nextInt(min, max);
@@ -24,23 +24,23 @@ public class Random_Kontaktu_Gen {
     }
 
     // generate a name
-    String generateName1(String firstNames[], String lastNames[] ){
+    public String generateName1(String firstNames[], String lastNames[] ){
         return firstNames[randomNr(0, 10)] + lastNames[randomNr(0, 10)];
     }
 
     // generate a first name
-    String generateName(){
+    public String generateName(){
         return firstNames[randomNr(0, 99)];
     }
 
     // generate a last name
-    String generateLastName(){
+    public String generateLastName(){
         String lastName;
         return lastName = lastNames[randomNr(0, 10)];
     }
 
     // generate phone number +xxx xxx xxxxx
-    String generatePhoneNumber(){
+    public String generatePhoneNumber(){
         String phoneApendix = "+";
         String contryCode = "370 ";
         String networkCode = (randomNr(100, 999)) + " ";
@@ -48,7 +48,7 @@ public class Random_Kontaktu_Gen {
         return phoneApendix + contryCode + networkCode + number;
     }
     // generate city
-    String randomCity(){
+    public String randomCity(){
         return cities[randomNr(0, 10)];
     }
 
