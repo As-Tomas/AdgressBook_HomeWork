@@ -1,6 +1,8 @@
 package com.adresuKnigute;
 
+import javax.swing.*;
 import java.util.Scanner;
+
 
 class metodai{
 
@@ -127,6 +129,12 @@ public class Main {
 //            System.out.println(" Person not found in Adresu knygute");
 //        }
 
+        PagrindinisLangas langas = new PagrindinisLangas();
+        langas.setTitle("Uzrasu knygute");
+        langas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        langas.setSize(640,480);
+        langas.setVisible(true);
+        langas.setLocationRelativeTo(null);
 
         Adresine knygute = new Adresine();
 
