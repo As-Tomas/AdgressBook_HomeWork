@@ -23,25 +23,34 @@ public class PaieskaDialog extends JDialog {
         return miestas.getText();
     }
 
-    PaieskaDialog(JFrame PagrindinisLangas, boolean arModalinis) {
+    PaieskaDialog(JFrame PagrindinisLangas, boolean arModalinis, boolean miestoFealdas) {
         super(PagrindinisLangas, "Paieskos dialogas", arModalinis);
+
 
         Container cont = getContentPane();
         JPanel elementai = new JPanel();
-        elementai.setLayout(new GridLayout(4,2,20,20));
-        elementai.add(new JLabel("Vardas",SwingConstants.RIGHT));
-        elementai.add(vardas);
-        elementai.add(new JLabel("Pavarde", SwingConstants.RIGHT));
-        elementai.add(pavarde);
-        elementai.add(new JLabel("Miestas", SwingConstants.RIGHT));
-        elementai.add(miestas);
+        if (miestoFealdas) {
+            elementai.setLayout(new GridLayout(4, 2, 20, 20));
+            elementai.add(new JLabel("Vardas", SwingConstants.RIGHT));
+            elementai.add(vardas);
+            elementai.add(new JLabel("Pavarde", SwingConstants.RIGHT));
+            elementai.add(pavarde);
+            elementai.add(new JLabel("Miestas", SwingConstants.RIGHT));
+            elementai.add(miestas);
+        } else {
+            elementai.setLayout(new GridLayout(3, 2, 20, 20));
+            elementai.add(new JLabel("Vardas", SwingConstants.RIGHT));
+            elementai.add(vardas);
+            elementai.add(new JLabel("Pavarde", SwingConstants.RIGHT));
+            elementai.add(pavarde);
+        }
         JButton ok = new JButton("OK");
         JButton cancel = new JButton("Cancel");
         elementai.add(ok);
         elementai.add(cancel);
 
         ok.addActionListener(new OKPaspaudimas());
-        //cancel.addActionListener(new CancelPaspaudimas());
+        cancel.addActionListener(new CancelPaspaudimas());
 
         cont.add(elementai,BorderLayout.CENTER);
         //Tuscios paneles del padding'u

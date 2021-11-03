@@ -119,7 +119,9 @@ class PagrindinisLangas extends JFrame implements ActionListener{
 
         paieska.add(pagVardPav);
         paieska.add(pagVardPavMie);
-        pagVardPav.addActionListener(new ModalinioAtidarymas());
+        pagVardPavMie.addActionListener(new neModalinioAtidarymas(true));
+        pagVardPav.addActionListener(new neModalinioAtidarymas(false));
+
 
         pagrindinisMeniu.add(failas);//i meniu juosta idedam faila
         pagrindinisMeniu.add(paieska);
@@ -320,11 +322,22 @@ class PagrindinisLangas extends JFrame implements ActionListener{
                 break;
         }
     }
-    class ModalinioAtidarymas implements ActionListener{
 
+    class neModalinioAtidarymas implements ActionListener{
+
+        private boolean cityFeald;
+
+        neModalinioAtidarymas(boolean cityFeald){
+            this.cityFeald = cityFeald;
+        }
         @Override
         public void actionPerformed(ActionEvent e) {
-            PaieskaDialog paieskosDialogoLangas=new PaieskaDialog(null,true);
+            PaieskaDialog paieskosDialogoLangas;
+            if (cityFeald) {
+                paieskosDialogoLangas = new PaieskaDialog(null, false, true);
+            } else {
+                paieskosDialogoLangas = new PaieskaDialog(null, false, false);
+            }
             paieskosDialogoLangas.setSize(250,180);
             paieskosDialogoLangas.setVisible(true);
 
