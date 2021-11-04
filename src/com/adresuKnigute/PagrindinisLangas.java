@@ -332,11 +332,11 @@ class PagrindinisLangas extends JFrame implements ActionListener{
         }
         @Override
         public void actionPerformed(ActionEvent e) {
-            PaieskaDialog paieskosDialogoLangas;
+            PaieskaModalinisLangas paieskosDialogoLangas;
             if (cityFeald) {
-                paieskosDialogoLangas = new PaieskaDialog(null, false, true);
+                paieskosDialogoLangas = new PaieskaModalinisLangas(null, true, true);
             } else {
-                paieskosDialogoLangas = new PaieskaDialog(null, false, false);
+                paieskosDialogoLangas = new PaieskaModalinisLangas(null, false, false);
             }
             paieskosDialogoLangas.setSize(250,180);
             paieskosDialogoLangas.setVisible(true);
