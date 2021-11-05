@@ -10,8 +10,8 @@ public class PaieskaDialog extends JDialog {
     //todo cia sukurti ne modalini langa
 
     interface SearchResultsOutput{
-        //void outputSearchResults(Adresine adrRezults);
-        void tempoutputSearchResults(String adrRezults);
+        void outputSearchResults(String vardas, String pavarde, String miestas);
+        void restoreContacts();
     }
     SearchResultsOutput pagrindinisLangas;
 
@@ -19,13 +19,13 @@ public class PaieskaDialog extends JDialog {
     JTextField pavarde=new JTextField();
     JTextField miestas=new JTextField();
 
-    /*public String getVardas(){
+    public String getVardas(){
         return vardas.getText();
     }
     public String getpavarde(){
         return pavarde.getText();
     }
-    public String getmiestas(){ return miestas.getText(); }*/
+    public String getmiestas(){ return miestas.getText(); }
 
     PaieskaDialog(JFrame PagrindinisLangas, boolean arModalinis, boolean miestoFealdas) {
         super(PagrindinisLangas, "Paieskos dialogas", arModalinis); //tueru buti false
@@ -72,7 +72,7 @@ public class PaieskaDialog extends JDialog {
     class OKPaspaudimas implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            pagrindinisLangas.tempoutputSearchResults(vardas.getText());
+            pagrindinisLangas.outputSearchResults(vardas.getText(), pavarde.getText(), miestas.getText());
             //dispose();
         }
     }
@@ -81,6 +81,7 @@ public class PaieskaDialog extends JDialog {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            pagrindinisLangas.restoreContacts();
             dispose();
         }
     }

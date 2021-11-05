@@ -51,6 +51,19 @@ class metodai{
         }
         System.out.println("\n");
     }
+    //3. Paieška nurodžius vardą, pavardę ir miestą UI
+    public Adresine searchByFirstNameAndLastNameAndCityReturn( Adresine knygute, String givenFirstName, String givenLastName, String givenCity){
+        Adresine paieskosRezultatai = new Adresine();
+        boolean notFound1 = true;
+        for (Asmuo i : knygute.getAsmenuKontaktai()) {
+            if (i.getVardas().equals(givenFirstName) && i.getPavarde().equals(givenLastName) && i.getMiestas().equals(givenCity)) {
+                paieskosRezultatai.irasytiKontakta(i);
+                notFound1 = false;
+            }
+        }
+        System.out.println("\n");
+        return paieskosRezultatai;
+    }
 
     //4. Rikiavimas
     public void rikiavimas(Adresine knygute){
@@ -60,6 +73,7 @@ class metodai{
     public void failoNuskaitymas(Adresine knygute){
         FailoNuskaitymas.nuskaityk(knygute);
     }
+
 }
 
 public class Main {

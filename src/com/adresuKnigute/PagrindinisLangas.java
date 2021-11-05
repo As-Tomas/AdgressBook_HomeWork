@@ -12,7 +12,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-class PagrindinisLangas extends JFrame implements ActionListener{
+class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.SearchResultsOutput{
+
+    PaieskaDialog no_modalWindow = new PaieskaDialog(this,false, true);
 
     JTable lentele;//lentele, kur perziurimi failo duomenys
     //Tai lenteles modelio (kiek ir kokie stulpeliai, be to, galima nurodyti ir lenteles turini
@@ -173,27 +175,9 @@ class PagrindinisLangas extends JFrame implements ActionListener{
                     FailoNuskaitymas.nuskaityk(knygute);//
                     //--------------
 
-                    //Trinam senus lenteles duomenis, jei tokiu yra
-                    for(int i=lentelesModelis.getRowCount()-1;i>=0;i--)//einame per kiekviena eilute nuo galo ir ja triname
-                    {
-                        lentelesModelis.removeRow(i);//trinam nuo paskutines eilutes
-                    }
-                    for(int i=0;i<knygute.getAsmenuKontaktai().size();i++){
-                        String vardas=knygute.getAsmenuKontaktai().get(i).getVardas();
-                        String Pavarde=knygute.getAsmenuKontaktai().get(i).getPavarde();
-                        String Miestas=knygute.getAsmenuKontaktai().get(i).getMiestas();
-                        String Telefonas=knygute.getAsmenuKontaktai().get(i).getTelefonas();
+                    UiMetods metodas4 = new UiMetods();
+                    metodas4.adresatuSarasas(lentelesModelis,knygute);
 
-                        Object eil[]=new Object[5];//cia eilutes masyvas
-                        //uzpildom eilute
-                        int nr=i+1;//kad ne nuo 0 numeruotu
-                        eil[0]=nr;
-                        eil[1]=vardas;
-                        eil[2]=Pavarde;
-                        eil[3]=Miestas;
-                        eil[4]=Telefonas;
-                        lentelesModelis.insertRow(i, eil);
-                    }
                 }
                 statusText.setText((knygute.getKontaktuSkaicius() - existingContacts) + " new contacts imported. Tottal: " + knygute.getKontaktuSkaicius());
                 break;
@@ -205,26 +189,9 @@ class PagrindinisLangas extends JFrame implements ActionListener{
                     knygute.irasytiKontakta(asmuo);
                 }
 
-                for(int i=lentelesModelis.getRowCount()-1;i>=0;i--)//einame per kiekviena eilute nuo galo ir ja triname
-                {
-                    lentelesModelis.removeRow(i);//trinam nuo paskutines eilutes
-                }
-                for(int i=0;i<knygute.getAsmenuKontaktai().size();i++){
-                    String vardas=knygute.getAsmenuKontaktai().get(i).getVardas();
-                    String Pavarde=knygute.getAsmenuKontaktai().get(i).getPavarde();
-                    String Miestas=knygute.getAsmenuKontaktai().get(i).getMiestas();
-                    String Telefonas=knygute.getAsmenuKontaktai().get(i).getTelefonas();
+                UiMetods metodas3 = new UiMetods();
+                metodas3.adresatuSarasas(lentelesModelis,knygute);
 
-                    Object eil[]=new Object[5];//cia eilutes masyvas
-                    //uzpildom eilute
-                    int nr=i+1;//kad ne nuo 0 numeruotu
-                    eil[0]=nr;
-                    eil[1]=vardas;
-                    eil[2]=Pavarde;
-                    eil[3]=Miestas;
-                    eil[4]=Telefonas;
-                    lentelesModelis.insertRow(i, eil);
-                }
                 statusText.setText((knygute.getKontaktuSkaicius() - existingContacts) + " new contacts imported. Tottal: " + knygute.getKontaktuSkaicius());
 
                 break;
@@ -232,82 +199,36 @@ class PagrindinisLangas extends JFrame implements ActionListener{
             case "Varda" :
                 knygute.getAsmenuKontaktai().sort(new RusiavimasPVarda().reversed());
                 statusText.setText("Surusiuota pagal Varda ");
-                for(int i=lentelesModelis.getRowCount()-1;i>=0;i--)//einame per kiekviena eilute nuo galo ir ja triname
-                {
-                    lentelesModelis.removeRow(i);//trinam nuo paskutines eilutes
-                }
-                for(int i=0;i<knygute.getAsmenuKontaktai().size();i++){
-                    String vardas=knygute.getAsmenuKontaktai().get(i).getVardas();
-                    String Pavarde=knygute.getAsmenuKontaktai().get(i).getPavarde();
-                    String Miestas=knygute.getAsmenuKontaktai().get(i).getMiestas();
-                    String Telefonas=knygute.getAsmenuKontaktai().get(i).getTelefonas();
 
-                    Object eil[]=new Object[5];//cia eilutes masyvas
-                    //uzpildom eilute
-                    int nr=i+1;//kad ne nuo 0 numeruotu
-                    eil[0]=nr;
-                    eil[1]=vardas;
-                    eil[2]=Pavarde;
-                    eil[3]=Miestas;
-                    eil[4]=Telefonas;
-                    lentelesModelis.insertRow(i, eil);
-                }
+                UiMetods metodas2 = new UiMetods();
+                metodas2.adresatuSarasas(lentelesModelis,knygute);
+
                 break;
 
             case "Pavarde" :
                 knygute.getAsmenuKontaktai().sort(new Rusiavimas().reversed());
                 statusText.setText("Surusiuota pagal Pavarde ");
-                for(int i=lentelesModelis.getRowCount()-1;i>=0;i--)//einame per kiekviena eilute nuo galo ir ja triname
-                {
-                    lentelesModelis.removeRow(i);//trinam nuo paskutines eilutes
-                }
-                for(int i=0;i<knygute.getAsmenuKontaktai().size();i++){
-                    String vardas=knygute.getAsmenuKontaktai().get(i).getVardas();
-                    String Pavarde=knygute.getAsmenuKontaktai().get(i).getPavarde();
-                    String Miestas=knygute.getAsmenuKontaktai().get(i).getMiestas();
-                    String Telefonas=knygute.getAsmenuKontaktai().get(i).getTelefonas();
 
-                    Object eil[]=new Object[5];//cia eilutes masyvas
-                    //uzpildom eilute
-                    int nr=i+1;//kad ne nuo 0 numeruotu
-                    eil[0]=nr;
-                    eil[1]=vardas;
-                    eil[2]=Pavarde;
-                    eil[3]=Miestas;
-                    eil[4]=Telefonas;
-                    lentelesModelis.insertRow(i, eil);
-                }
+                UiMetods metodas1 = new UiMetods();
+                metodas1.adresatuSarasas(lentelesModelis,knygute);
+
                 break;
 
             case "Miesta" :
                 knygute.getAsmenuKontaktai().sort(new RusiavimasPMiesta().reversed());
                 statusText.setText("Surusiuota pagal Miesta ");
-                for(int i=lentelesModelis.getRowCount()-1;i>=0;i--)//einame per kiekviena eilute nuo galo ir ja triname
-                {
-                    lentelesModelis.removeRow(i);//trinam nuo paskutines eilutes
-                }
-                for(int i=0;i<knygute.getAsmenuKontaktai().size();i++){
-                    String vardas=knygute.getAsmenuKontaktai().get(i).getVardas();
-                    String Pavarde=knygute.getAsmenuKontaktai().get(i).getPavarde();
-                    String Miestas=knygute.getAsmenuKontaktai().get(i).getMiestas();
-                    String Telefonas=knygute.getAsmenuKontaktai().get(i).getTelefonas();
 
-                    Object eil[]=new Object[5];//cia eilutes masyvas
-                    //uzpildom eilute
-                    int nr=i+1;//kad ne nuo 0 numeruotu
-                    eil[0]=nr;
-                    eil[1]=vardas;
-                    eil[2]=Pavarde;
-                    eil[3]=Miestas;
-                    eil[4]=Telefonas;
-                    lentelesModelis.insertRow(i, eil);
-                }
+                UiMetods metodas0 = new UiMetods();
+                metodas0.adresatuSarasas(lentelesModelis,knygute);
+
                 break;
 
             case "Paieska":
                 // todo sukurti ne modalini langa
+                no_modalWindow.setVisible(true);
 
-                statusText.setText("Ivikdyta paieska ");
+
+                statusText.setText("Vikdoma paieska... ");
                 break;
 
             case "Sukurti kontakta":
@@ -321,6 +242,24 @@ class PagrindinisLangas extends JFrame implements ActionListener{
             default:
                 break;
         }
+    }
+
+    @Override
+    public void outputSearchResults(String v, String p, String m) {
+        metodai met4 = new metodai();
+        Adresine findedContacts = new Adresine();
+        findedContacts = met4.searchByFirstNameAndLastNameAndCityReturn(knygute, v, p, m);
+
+        UiMetods metodas = new UiMetods();
+        metodas.adresatuSarasas(lentelesModelis,findedContacts);
+
+
+        statusText.setText( "Paieska atlikta." );
+    }
+
+    public void restoreContacts(){
+        UiMetods metodas = new UiMetods();
+        metodas.adresatuSarasas(lentelesModelis,knygute);
     }
 
     class neModalinioAtidarymas implements ActionListener{
