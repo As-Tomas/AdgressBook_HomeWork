@@ -55,12 +55,29 @@ class metodai{
     public Adresine searchByFirstNameAndLastNameAndCityReturn( Adresine knygute, String givenFirstName, String givenLastName, String givenCity){
         Adresine paieskosRezultatai = new Adresine();
         boolean notFound1 = true;
-        for (Asmuo i : knygute.getAsmenuKontaktai()) {
-            if (i.getVardas().equals(givenFirstName) && i.getPavarde().equals(givenLastName) && i.getMiestas().equals(givenCity)) {
-                paieskosRezultatai.irasytiKontakta(i);
-                notFound1 = false;
+        if ( givenLastName.equals("") && givenCity.equals("") ){
+            for (Asmuo i : knygute.getAsmenuKontaktai()) {
+                if (i.getVardas().equals(givenFirstName)) {
+                    paieskosRezultatai.irasytiKontakta(i);
+                    notFound1 = false;
+                }
+            }
+        } else if (givenCity.equals("") ){
+            for (Asmuo i : knygute.getAsmenuKontaktai()) {
+                if (i.getVardas().equals(givenFirstName) && i.getPavarde().equals(givenLastName)) {
+                    paieskosRezultatai.irasytiKontakta(i);
+                    notFound1 = false;
+                }
+            }
+        } else {
+            for (Asmuo i : knygute.getAsmenuKontaktai()) {
+                if (i.getVardas().equals(givenFirstName) && i.getPavarde().equals(givenLastName) && i.getMiestas().equals(givenCity)) {
+                    paieskosRezultatai.irasytiKontakta(i);
+                    notFound1 = false;
+                }
             }
         }
+
         System.out.println("\n");
         return paieskosRezultatai;
     }

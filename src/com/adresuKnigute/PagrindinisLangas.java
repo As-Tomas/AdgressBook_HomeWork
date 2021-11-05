@@ -247,11 +247,11 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
     @Override
     public void outputSearchResults(String v, String p, String m) {
         metodai met4 = new metodai();
-        Adresine findedContacts = new Adresine();
-        findedContacts = met4.searchByFirstNameAndLastNameAndCityReturn(knygute, v, p, m);
+        Adresine contactsFount = new Adresine();
+        contactsFount = met4.searchByFirstNameAndLastNameAndCityReturn(knygute, v, p, m);
 
         UiMetods metodas = new UiMetods();
-        metodas.adresatuSarasas(lentelesModelis,findedContacts);
+        metodas.adresatuSarasas(lentelesModelis,contactsFount);
 
 
         statusText.setText( "Paieska atlikta." );
