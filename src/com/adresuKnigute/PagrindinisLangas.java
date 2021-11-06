@@ -323,7 +323,6 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
                             System.out.println(" Found: ");
                             System.out.println(i.getVardas() +" " + i.getPavarde() + " " + i.getMiestas() + " " + i.getTelefonas());
                             notFound = false;
-                            //todo make one more poput to show founded contacts
                         }
                     }
                     if(notFound){
