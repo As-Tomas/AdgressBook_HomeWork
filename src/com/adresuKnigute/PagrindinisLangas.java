@@ -12,9 +12,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.SearchResultsOutput{
+class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.SearchResultsOutput, PaieskaNeModalinisLangas.SearchResultsOutput2{
 
     PaieskaDialog no_modalWindow = new PaieskaDialog(this,false, true);
+    PaieskaNeModalinisLangas no_modalSerchWindow = new PaieskaNeModalinisLangas(this,false);
 //    PopUpGenerateNumContacts popUPHovMuchGenerate = new PopUpGenerateNumContacts(this,true);
 
     JTable lentele;//lentele, kur perziurimi failo duomenys
@@ -102,9 +103,9 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
         katalog.setMnemonic(KeyEvent.VK_O);
 
         JMenuItem pagVardPav=new JMenuItem("Pagal varda ir pavarde");
-        JMenuItem pagVardPavMie=new JMenuItem("Pagal varda, pavarde ir miesta");
-        pagVardPav.addActionListener(this);
-        pagVardPavMie.addActionListener(this);
+        JMenuItem pagVardPavMie=new JMenuItem("Pagal varda, pavarde ir miesta - Modalinis");
+        //pagVardPav.addActionListener(this); Skirtas realiai Case skiriui kad iskviestu @NR1
+        //pagVardPavMie.addActionListener(this); Net nera case sukurta
 
         JMenuItem close=new JMenuItem("Baigti darba");
         close.addActionListener(this);
@@ -117,7 +118,7 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
         paieska.add(pagVardPav);
         paieska.add(pagVardPavMie);
         pagVardPavMie.addActionListener(new pasirenkamasModalinioAtidarymas(true));
-        pagVardPav.addActionListener(new pasirenkamasModalinioAtidarymas(false));
+        pagVardPav.addActionListener(new No_modalFromMeniuSerachButonOpener());
 
 
         pagrindinisMeniu.add(failas);//i meniu juosta idedam faila
@@ -225,6 +226,9 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
 
             case "Paieska":
                 // todo sukurti ne modalini langa
+                no_modalWindow.setVardas();
+                no_modalWindow.setpavarde();
+                no_modalWindow.setMiestas();
                 no_modalWindow.setVisible(true);
 
 
@@ -236,6 +240,10 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
 
                 statusText.setText("Kontakstas sukurtas...");
                 break;
+//            //@NR1
+//            case "Pagal varda ir pavarde":
+//                no_modalSerchWindow.setVisible(true);
+//                break;
 
             case "Baigti darba":
                 System.exit(0);
@@ -246,6 +254,7 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
 
     @Override
     public void outputSearchResults(String v, String p, String m) {
+        System.out.println(v);
         metodai met4 = new metodai();
         Adresine contactsFount = new Adresine();
         contactsFount = met4.searchByFirstNameAndLastNameAndCityReturn(knygute, v, p, m);
@@ -254,6 +263,9 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
         metodas.adresatuSarasas(lentelesModelis,contactsFount);
 
         int total = contactsFount.getKontaktuSkaicius();
+        if(total == 0){
+                        JOptionPane.showMessageDialog(null, " Person not found in Adresu knygute");
+                    }
         statusText.setText( "Rasta: " + total );
     }
 
@@ -261,6 +273,19 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
         UiMetods metodas = new UiMetods();
         metodas.adresatuSarasas(lentelesModelis,knygute);
     }
+
+    @Override
+    public void outputSearchResults2(String vardas, String pavarde, String miestas) {
+        outputSearchResults(vardas, pavarde, miestas);
+        System.out.println(vardas);
+    }
+
+    @Override
+    public void restoreContacts2() {
+        UiMetods metodas = new UiMetods();
+        metodas.adresatuSarasas(lentelesModelis,knygute);
+    }
+
 
     class PopUpGenNumContacts implements ActionListener{
 
@@ -301,58 +326,50 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
         @Override
         public void actionPerformed(ActionEvent e) {
             PaieskaModalinisLangas paieskosDialogoLangas;
+            PaieskaNeModalinisLangas paieskosDialogoLangasN;
             if (cityFeald) {
                 paieskosDialogoLangas = new PaieskaModalinisLangas(null, true, true);
                 paieskosDialogoLangas.setSize(250,240);
+
+
+                paieskosDialogoLangas.setLocationRelativeTo(null);
+                paieskosDialogoLangas.setVisible(true);
+
+                if (paieskosDialogoLangas.arPaspaustaOK == true){
+                    String vardas = paieskosDialogoLangas.getVardas();
+                    String pavarde = paieskosDialogoLangas.getpavarde();
+                    String miestas = paieskosDialogoLangas.getmiestas();
+
+                    //----------
+                    outputSearchResults(vardas,pavarde,miestas);
+                    //todo adjust to take effect and not modal window
+                    //----------
             } else {
-                paieskosDialogoLangas = new PaieskaModalinisLangas(null, false, false);
-                paieskosDialogoLangas.setSize(250,180);
+                paieskosDialogoLangasN = new PaieskaNeModalinisLangas(null, false);
+                paieskosDialogoLangasN.setSize(250,180);
+                paieskosDialogoLangasN.setVardas();
+                paieskosDialogoLangasN.setpavarde();
+            }
             }
 
-            paieskosDialogoLangas.setVisible(true);
+        }
+    }
 
-            if (paieskosDialogoLangas.arPaspaustaOK == true){
-                String vardas = paieskosDialogoLangas.getVardas();
-                String pavarde = paieskosDialogoLangas.getpavarde();
-                String miestas = paieskosDialogoLangas.getmiestas();
+    class No_modalFromMeniuSerachButonOpener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            no_modalSerchWindow.setSize(250, 180);
+            no_modalSerchWindow.setLocationRelativeTo(null);
+            no_modalSerchWindow.setVisible(true);
+            no_modalSerchWindow.setVardas();
+            no_modalSerchWindow.setpavarde();
 
-                //----------
-                outputSearchResults(vardas,pavarde,miestas);
-                //todo adjust to take effect and not modal window
-                //----------
-
-//                if (miestas.equals("")){
-//                    boolean notFound = true;
-//                    for( Asmuo i : knygute.getAsmenuKontaktai()){
-//                        if(i.getVardas().equals(vardas) && i.getPavarde().equals(pavarde)){
-//                            System.out.println(" Found: ");
-//                            System.out.println(i.getVardas() +" " + i.getPavarde() + " " + i.getMiestas() + " " + i.getTelefonas());
-//                            notFound = false;
-//                            //todo make one more poput to show founded contacts
-//                        }
-//                    }
-//                    if(notFound){
-//                        JOptionPane.showMessageDialog(null, " Person not found in Adresu knygute");
-//                    }
-//                    System.out.println("\n");
-//
-//                } else {
-//                    boolean notFound1 = true;
-//                    for (Asmuo i : knygute.getAsmenuKontaktai()) {
-//                        if (i.getVardas().equals(vardas) && i.getPavarde().equals(pavarde) && i.getMiestas().equals(miestas)) {
-//                            System.out.println(" Found: ");
-//                            System.out.println(i.getVardas() + " " + i.getPavarde() + " " + i.getMiestas() + " " + i.getTelefonas());
-//                            notFound1 = false;
-//                            //todo make one more poput to show founded contacts
-//                        }
-//                    }
-//                    if (notFound1) {
-//                        JOptionPane.showMessageDialog(null, " Person not found in Adresu knygute");
-//                    }
-//                    System.out.println("\n");
-//                }
-            }
-
+//            if (no_modalSerchWindow.doesItPressed){
+//                String v = no_modalSerchWindow.vardas.toString();
+//                String p = no_modalSerchWindow.pavarde.toString();
+//                String m ="";
+//                outputSearchResults(v,p,m);
+//            }
         }
     }
 }
