@@ -318,6 +318,7 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
 
                 //----------
                 outputSearchResults(vardas,pavarde,miestas);
+                //todo adjust to take effect and not modal window
                 //----------
 
 //                if (miestas.equals("")){
