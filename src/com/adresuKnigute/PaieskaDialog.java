@@ -63,7 +63,8 @@ public class PaieskaDialog extends JDialog {
         cont.add(new JPanel(),BorderLayout.EAST);
         cont.add(new JPanel(),BorderLayout.WEST);
 
-        setSize(250,150);
+        setSize(250,250);
+        setLocationRelativeTo(null);
 
         pagrindinisLangas=(SearchResultsOutput)PagrindinisLangas;
 

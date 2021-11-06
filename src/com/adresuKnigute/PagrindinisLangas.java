@@ -15,12 +15,12 @@ import java.util.Scanner;
 class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.SearchResultsOutput{
 
     PaieskaDialog no_modalWindow = new PaieskaDialog(this,false, true);
+//    PopUpGenerateNumContacts popUPHovMuchGenerate = new PopUpGenerateNumContacts(this,true);
 
     JTable lentele;//lentele, kur perziurimi failo duomenys
     //Tai lenteles modelio (kiek ir kokie stulpeliai, be to, galima nurodyti ir lenteles turini
     DefaultTableModel lentelesModelis;
     JButton genContacts;
-    JTextField howmuch;
     JLabel statusText;
     Adresine knygute = new Adresine();
     JButton paieska;
@@ -28,10 +28,7 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
     JRadioButton rusiavimasPV = new JRadioButton("Varda", false);
     JRadioButton rusiavimasPP = new JRadioButton("Pavarde", false);
     JRadioButton rusiavimasPM = new JRadioButton("Miesta", false);
-
-    JLabel modalinioAtsakymas=new JLabel("Pasiruoses");
-    JLabel nemodalinioAtsakymas=new JLabel("Pasiruoses");
-
+    int genContactsNumer = 0;
 
 
     PagrindinisLangas(){
@@ -39,12 +36,11 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
         cont.setLayout(new BorderLayout());
 
         genContacts = new JButton("Generate Contacts");
-        genContacts.addActionListener(this);
+        genContacts.addActionListener(new PopUpGenNumContacts());
+        //genContacts.addActionListener(this);
 
         paieska = new JButton("Paieska");
         paieska.addActionListener(this);
-
-        howmuch = new JTextField();
 
         irasytiKontakta = new JButton("Sukurti kontakta");
         irasytiKontakta.addActionListener(this);
@@ -72,7 +68,6 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
 
         JPanel kaireVirsus = new JPanel();
         kaireVirsus.setLayout(new GridLayout(4,1,10,10));
-        kaireVirsus.add(howmuch);
         kaireVirsus.add(genContacts);
         kaireVirsus.add(irasytiKontakta);
         kaireVirsus.add(paieska);
@@ -121,8 +116,8 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
 
         paieska.add(pagVardPav);
         paieska.add(pagVardPavMie);
-        pagVardPavMie.addActionListener(new neModalinioAtidarymas(true));
-        pagVardPav.addActionListener(new neModalinioAtidarymas(false));
+        pagVardPavMie.addActionListener(new pasirenkamasModalinioAtidarymas(true));
+        pagVardPav.addActionListener(new pasirenkamasModalinioAtidarymas(false));
 
 
         pagrindinisMeniu.add(failas);//i meniu juosta idedam faila
@@ -181,18 +176,23 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
                 }
                 statusText.setText((knygute.getKontaktuSkaicius() - existingContacts) + " new contacts imported. Tottal: " + knygute.getKontaktuSkaicius());
                 break;
+//            case "Generate Contacts":
+//                existingContacts = knygute.getKontaktuSkaicius();
+//
+//                for( int i=0; i<10; i++){
+//                    Asmuo asmuo = new Asmuo();
+//                    knygute.irasytiKontakta(asmuo);
+//                }
+//
+//                UiMetods metodas3 = new UiMetods();
+//                metodas3.adresatuSarasas(lentelesModelis,knygute);
+//
+//                statusText.setText((knygute.getKontaktuSkaicius() - existingContacts) + " new contacts imported. Tottal: " + knygute.getKontaktuSkaicius());
+//
+//                break;
             case "Generate Contacts":
-                existingContacts = knygute.getKontaktuSkaicius();
-
-                for( int i=0; i<5; i++){
-                    Asmuo asmuo = new Asmuo();
-                    knygute.irasytiKontakta(asmuo);
-                }
-
-                UiMetods metodas3 = new UiMetods();
-                metodas3.adresatuSarasas(lentelesModelis,knygute);
-
-                statusText.setText((knygute.getKontaktuSkaicius() - existingContacts) + " new contacts imported. Tottal: " + knygute.getKontaktuSkaicius());
+//                popUPHovMuchGenerate.setSize(250,180);
+//                popUPHovMuchGenerate.setVisible(true);
 
                 break;
 
@@ -253,8 +253,8 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
         UiMetods metodas = new UiMetods();
         metodas.adresatuSarasas(lentelesModelis,contactsFount);
 
-
-        statusText.setText( "Paieska atlikta." );
+        int total = contactsFount.getKontaktuSkaicius();
+        statusText.setText( "Rasta: " + total );
     }
 
     public void restoreContacts(){
@@ -262,11 +262,40 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
         metodas.adresatuSarasas(lentelesModelis,knygute);
     }
 
-    class neModalinioAtidarymas implements ActionListener{
+    class PopUpGenNumContacts implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            PopUpGenerateNumContacts askNum = new PopUpGenerateNumContacts(null, true);
+            askNum.setSize(280,120);
+            askNum.setLocationRelativeTo(null);
+            askNum.setVisible(true);
+
+            if (askNum.doesItPressed){
+                genContactsNumer = askNum.getNumContacts();
+
+                int existingContacts = knygute.getKontaktuSkaicius();
+
+                for( int i=0; i<genContactsNumer; i++){
+                    Asmuo asmuo = new Asmuo();
+                    knygute.irasytiKontakta(asmuo);
+                }
+
+                UiMetods metodas3 = new UiMetods();
+                metodas3.adresatuSarasas(lentelesModelis,knygute);
+
+                statusText.setText((knygute.getKontaktuSkaicius() - existingContacts) + " new contacts imported. Tottal: " + knygute.getKontaktuSkaicius());
+
+
+            }
+        }
+    }
+
+    class pasirenkamasModalinioAtidarymas implements ActionListener{
 
         private boolean cityFeald;
 
-        neModalinioAtidarymas(boolean cityFeald){
+        pasirenkamasModalinioAtidarymas(boolean cityFeald){
             this.cityFeald = cityFeald;
         }
         @Override
@@ -274,10 +303,12 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
             PaieskaModalinisLangas paieskosDialogoLangas;
             if (cityFeald) {
                 paieskosDialogoLangas = new PaieskaModalinisLangas(null, true, true);
+                paieskosDialogoLangas.setSize(250,240);
             } else {
                 paieskosDialogoLangas = new PaieskaModalinisLangas(null, false, false);
+                paieskosDialogoLangas.setSize(250,180);
             }
-            paieskosDialogoLangas.setSize(250,180);
+
             paieskosDialogoLangas.setVisible(true);
 
             if (paieskosDialogoLangas.arPaspaustaOK == true){
