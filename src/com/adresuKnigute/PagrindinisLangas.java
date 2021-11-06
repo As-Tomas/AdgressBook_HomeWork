@@ -316,35 +316,40 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
                 String pavarde = paieskosDialogoLangas.getpavarde();
                 String miestas = paieskosDialogoLangas.getmiestas();
 
-                if (miestas.equals("")){
-                    boolean notFound = true;
-                    for( Asmuo i : knygute.getAsmenuKontaktai()){
-                        if(i.getVardas().equals(vardas) && i.getPavarde().equals(pavarde)){
-                            System.out.println(" Found: ");
-                            System.out.println(i.getVardas() +" " + i.getPavarde() + " " + i.getMiestas() + " " + i.getTelefonas());
-                            notFound = false;
-                        }
-                    }
-                    if(notFound){
-                        JOptionPane.showMessageDialog(null, " Person not found in Adresu knygute");
-                    }
-                    System.out.println("\n");
+                //----------
+                outputSearchResults(vardas,pavarde,miestas);
+                //----------
 
-                } else {
-                    boolean notFound1 = true;
-                    for (Asmuo i : knygute.getAsmenuKontaktai()) {
-                        if (i.getVardas().equals(vardas) && i.getPavarde().equals(pavarde) && i.getMiestas().equals(miestas)) {
-                            System.out.println(" Found: ");
-                            System.out.println(i.getVardas() + " " + i.getPavarde() + " " + i.getMiestas() + " " + i.getTelefonas());
-                            notFound1 = false;
-                            //todo make one more poput to show founded contacts
-                        }
-                    }
-                    if (notFound1) {
-                        JOptionPane.showMessageDialog(null, " Person not found in Adresu knygute");
-                    }
-                    System.out.println("\n");
-                }
+//                if (miestas.equals("")){
+//                    boolean notFound = true;
+//                    for( Asmuo i : knygute.getAsmenuKontaktai()){
+//                        if(i.getVardas().equals(vardas) && i.getPavarde().equals(pavarde)){
+//                            System.out.println(" Found: ");
+//                            System.out.println(i.getVardas() +" " + i.getPavarde() + " " + i.getMiestas() + " " + i.getTelefonas());
+//                            notFound = false;
+//                            //todo make one more poput to show founded contacts
+//                        }
+//                    }
+//                    if(notFound){
+//                        JOptionPane.showMessageDialog(null, " Person not found in Adresu knygute");
+//                    }
+//                    System.out.println("\n");
+//
+//                } else {
+//                    boolean notFound1 = true;
+//                    for (Asmuo i : knygute.getAsmenuKontaktai()) {
+//                        if (i.getVardas().equals(vardas) && i.getPavarde().equals(pavarde) && i.getMiestas().equals(miestas)) {
+//                            System.out.println(" Found: ");
+//                            System.out.println(i.getVardas() + " " + i.getPavarde() + " " + i.getMiestas() + " " + i.getTelefonas());
+//                            notFound1 = false;
+//                            //todo make one more poput to show founded contacts
+//                        }
+//                    }
+//                    if (notFound1) {
+//                        JOptionPane.showMessageDialog(null, " Person not found in Adresu knygute");
+//                    }
+//                    System.out.println("\n");
+//                }
             }
 
         }
