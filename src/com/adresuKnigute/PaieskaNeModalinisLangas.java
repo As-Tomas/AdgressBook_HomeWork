@@ -11,7 +11,6 @@ public class PaieskaNeModalinisLangas extends JDialog {
         void outputSearchResults2(String vardas, String pavarde, String miestas);
         void restoreContacts2();
     }
-
     SearchResultsOutput2 pagrindinisLang;
 
     private JTextField vardas = new JTextField();
@@ -26,8 +25,6 @@ public class PaieskaNeModalinisLangas extends JDialog {
 
     public void setVardas(){ vardas.setText(""); }
     public void setpavarde(){ pavarde.setText(""); }
-
-
 
     PaieskaNeModalinisLangas(JFrame parent, boolean doesItModal) {
         super(parent, "Paieskos ne modalinis langas", doesItModal);
@@ -54,7 +51,6 @@ public class PaieskaNeModalinisLangas extends JDialog {
         cnt.add(new JPanel(), BorderLayout.EAST);
 
         pagrindinisLang =(SearchResultsOutput2)parent;
-
     }
 
     class okPress implements ActionListener{

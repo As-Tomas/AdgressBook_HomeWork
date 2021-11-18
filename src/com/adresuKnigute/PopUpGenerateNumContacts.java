@@ -40,7 +40,6 @@ public class PopUpGenerateNumContacts extends JDialog {
         cnt.add(new JPanel(), BorderLayout.SOUTH);
         cnt.add(new JPanel(), BorderLayout.NORTH);
         cnt.add(new JPanel(), BorderLayout.WEST);
-
     }
 
     class okPress implements ActionListener {

@@ -7,8 +7,6 @@ import java.awt.event.ActionListener;
 
 public class PaieskaModalinisLangas extends JDialog {
 
-
-
     public boolean arPaspaustaOK = false;
 
     JTextField vardas=new JTextField();
@@ -27,7 +25,6 @@ public class PaieskaModalinisLangas extends JDialog {
 
     PaieskaModalinisLangas(JFrame PagrindinisLangas, boolean arModalinis, boolean miestoFealdas) {
         super(PagrindinisLangas, "Paieskos dialogas", arModalinis);
-
 
         Container cont = getContentPane();
         JPanel elementai = new JPanel();
@@ -60,9 +57,6 @@ public class PaieskaModalinisLangas extends JDialog {
         cont.add(new JPanel(),BorderLayout.SOUTH);
         cont.add(new JPanel(),BorderLayout.EAST);
         cont.add(new JPanel(),BorderLayout.WEST);
-
-
-
     }
 
     class OKPaspaudimas implements ActionListener {

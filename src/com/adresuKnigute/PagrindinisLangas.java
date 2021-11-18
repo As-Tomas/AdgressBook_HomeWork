@@ -4,13 +4,10 @@ import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.SearchResultsOutput, NaujoKontDialogas.KontaktoSukurimas, PaieskaNeModalinisLangas.SearchResultsOutput2{
 
@@ -32,7 +29,6 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
     JRadioButton rusiavimasPP = new JRadioButton("Pavarde", false);
     JRadioButton rusiavimasPM = new JRadioButton("Miesta", false);
     int genContactsNumer = 0;
-
 
     PagrindinisLangas(){
         Container cont=getContentPane();
@@ -67,14 +63,11 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
         rusiavimasPM.addActionListener(this);
         cont.add(radioSort,BorderLayout.NORTH);
 
-
-
         JPanel kaireVirsus = new JPanel();
         kaireVirsus.setLayout(new GridLayout(4,1,10,10));
         kaireVirsus.add(genContacts);
         kaireVirsus.add(irasytiKontakta);
         kaireVirsus.add(paieska);
-
 
         JPanel kaire = new JPanel();
         kaire.setLayout(new BorderLayout());
@@ -106,8 +99,6 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
 
         JMenuItem pagVardPav=new JMenuItem("Pagal varda ir pavarde");
         JMenuItem pagVardPavMie=new JMenuItem("Pagal varda, pavarde ir miesta - Modalinis");
-        //pagVardPav.addActionListener(this); Skirtas realiai Case skiriui kad iskviestu @NR1
-        //pagVardPavMie.addActionListener(this); Net nera case sukurta
 
         JMenuItem close=new JMenuItem("Baigti darba");
         close.addActionListener(this);
@@ -122,13 +113,9 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
         pagVardPavMie.addActionListener(new pasirenkamasModalinioAtidarymas(true));
         pagVardPav.addActionListener(new No_modalFromMeniuSerachButonOpener());
 
-
         pagrindinisMeniu.add(failas);//i meniu juosta idedam faila
         pagrindinisMeniu.add(paieska);
         setJMenuBar(pagrindinisMeniu);//idedam meniu juosta i langa
-
-
-
 
         //Lentele
         String stulpeliuVardai[]=new String[5];
@@ -147,10 +134,6 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
         //ikeliam i pagrindini langa
         cont.add(scrollPane,BorderLayout.CENTER);
 
-        //Naujo katalogo sukurimas
-        //File dir=new File("C:\\Users\\Studentas\\Desktop\\ManoNaujasKatalogas");
-        //if(!dir.exists())
-        //dir.mkdir();
     }
 
     @Override
@@ -167,11 +150,9 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
                 if(returnVal == JFileChooser.APPROVE_OPTION) {//reiskia pasirinkom faila ir paspaudem ok
                     File yourFolder = fc.getSelectedFile();//pasiimam kataloga, kuri pasirinkom
 
-                    //--------------
                     existingContacts = knygute.getKontaktuSkaicius();
 
-                    FailoNuskaitymas.nuskaityk(knygute);//
-                    //--------------
+                    FailoNuskaitymas.nuskaityk(knygute);
 
                     UiMetods metodas4 = new UiMetods();
                     metodas4.adresatuSarasas(lentelesModelis,knygute);
@@ -179,23 +160,8 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
                 }
                 statusText.setText((knygute.getKontaktuSkaicius() - existingContacts) + " new contacts imported. Tottal: " + knygute.getKontaktuSkaicius());
                 break;
-//            case "Generate Contacts":
-//                existingContacts = knygute.getKontaktuSkaicius();
-//
-//                for( int i=0; i<10; i++){
-//                    Asmuo asmuo = new Asmuo();
-//                    knygute.irasytiKontakta(asmuo);
-//                }
-//
-//                UiMetods metodas3 = new UiMetods();
-//                metodas3.adresatuSarasas(lentelesModelis,knygute);
-//
-//                statusText.setText((knygute.getKontaktuSkaicius() - existingContacts) + " new contacts imported. Tottal: " + knygute.getKontaktuSkaicius());
-//
-//                break;
+
             case "Generate Contacts":
-//                popUPHovMuchGenerate.setSize(250,180);
-//                popUPHovMuchGenerate.setVisible(true);
 
                 break;
 
@@ -245,10 +211,6 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
                 no_modal_ivedimas.setVisible(true);
 
                 break;
-//            //@NR1
-//            case "Pagal varda ir pavarde":
-//                no_modalSerchWindow.setVisible(true);
-//                break;
 
             case "Baigti darba":
                 System.exit(0);
@@ -324,8 +286,6 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
                 metodas3.adresatuSarasas(lentelesModelis,knygute);
 
                 statusText.setText((knygute.getKontaktuSkaicius() - existingContacts) + " new contacts imported. Tottal: " + knygute.getKontaktuSkaicius());
-
-
             }
         }
     }
@@ -377,13 +337,6 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
             no_modalSerchWindow.setVisible(true);
             no_modalSerchWindow.setVardas();
             no_modalSerchWindow.setpavarde();
-
-//            if (no_modalSerchWindow.doesItPressed){
-//                String v = no_modalSerchWindow.vardas.toString();
-//                String p = no_modalSerchWindow.pavarde.toString();
-//                String m ="";
-//                outputSearchResults(v,p,m);
-//            }
         }
     }
 }

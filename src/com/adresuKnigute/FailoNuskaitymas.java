@@ -13,8 +13,6 @@ public class FailoNuskaitymas {
             File myObj = new File("C:\\Users\\kalia\\IdeaProjects\\AdresuKnigute_1_Sav-Darbas\\out\\KontaktuSarasas.txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNext()) {
-                //String data = myReader.next();
-                //System.out.println(data); kad neterstu eterio
                 vardas = myReader.next();
                 pavarde = myReader.next();
                 miestas = myReader.next();

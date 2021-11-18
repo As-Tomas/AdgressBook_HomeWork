@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 class metodai{
 
-
     //1. Nurodytame mieste gyvenančių asmenų kiekio paieška;
     public void cityPopulation(Adresine knygute, String givenCity) {
         int kiekis=0;
@@ -96,70 +95,6 @@ class metodai{
 public class Main {
     public static void main(String[] args) {
 
-        //        Asmuo asm = new Asmuo("tomas", "bance", "kns", "+370 670 44112");
-//        System.out.println(asm.getMiestas());
-//        asm.createContact();
-//        System.out.println(asm.getMiestas());
-//
-//// generates 100 contats list
-//        ArrayList <Asmuo> uzrasine = new ArrayList(100);
-//        for(int i=0; i<100; i++){
-//            Asmuo kont = new Asmuo();
-//            uzrasine.add(kont);
-//        }
-//
-//        for( int i=0; i<10; i++){
-//            System.out.println(uzrasine.get(i).getVardas());
-//        }
-// generates 100 in adresine
-//        Adresine knygute = new Adresine();
-//        for( int i=0; i<10; i++){
-//            Asmuo asmuo = new Asmuo();
-//            knygute.irasytiKontakta(asmuo);
-//        }
-
-////Rusiavimas
-//        knygute.getAsmenuKontaktai().sort(new Rusiavimas().reversed());
-//
-//// Nurodytame mieste gyvenančių asmenų kiekio paieška
-//        String uzklausosMiestas = "Kaunas";
-//        int kiekis=0;
-//        for( Asmuo i : knygute.getAsmenuKontaktai()){
-//            if(i.getMiestas() == uzklausosMiestas){
-//                kiekis++;
-//            }
-//        }
-//        System.out.println(" Siame mieste gyvena: " + kiekis + " gyventojai. ");
-//// Paieška nurodžius vardą ir pavardę;
-//        String paieskomasV = "Jackson";
-//        String paieskomasP = "Johnson";
-//        boolean notFound = true;
-//        for( Asmuo i : knygute.getAsmenuKontaktai()){
-//            if(i.getVardas() == paieskomasV && i.getPavarde() == paieskomasP){
-//                System.out.println(" Found: ");
-//                System.out.println(i.getVardas() +" " + i.getPavarde() + " " + i.getMiestas() + " " + i.getTelefonas());
-//                notFound = false;
-//            }
-//        }
-//        if(notFound){
-//            System.out.println(" Person not found in Adresu knygute");
-//        }
-//// Paieška nurodžius vardą, pavardę ir miestą;
-//        String givenFirstName = "Jackson";
-//        String givenLastName = "Johnson";
-//        String givenCity = "Kaunas";
-//        boolean notFound1 = true;
-//        for( Asmuo i : knygute.getAsmenuKontaktai()){
-//            if(i.getVardas() == givenFirstName && i.getPavarde() == givenLastName && i.getMiestas() == givenCity){
-//                System.out.println(" Found: ");
-//                System.out.println(i.getVardas() +" " + i.getPavarde() + " " + i.getMiestas() + " " + i.getTelefonas());
-//                notFound1 = false;
-//            }
-//        }
-//        if(notFound1){
-//            System.out.println(" Person not found in Adresu knygute");
-//        }
-
         PagrindinisLangas langas = new PagrindinisLangas();
         langas.setTitle("Uzrasu knygute");
         langas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -232,64 +167,6 @@ public class Main {
                 break;
             }
         }
-        //                    cout << "Adresatu random sugeneravimas ir perziura" << endl;
-//                    randomKontoaktuGeneravimas(*adresuKnyga);
-//                    break;
-//                case 2:
-//                    cout << "Adresatu nuskaitymas is failo ir perziura" << endl;
-//                    kontaktuIvedimasIsFailo(*adresuKnyga);
-//                    break;
-//                case 3:
-//                    cout << "Nurodytame mieste gyvenanciu asmenu kiekio paieska" << endl;
-//                    asmenuSkaiciavimas(*adresuKnyga);
-//                    break;
-//                case 4:
-//                    cout << "Paieska nurodzius varda ir pavarde" << endl;
-//                    paieskaPagalVardasPavarde(*adresuKnyga);
-//                    break;
-//                case 5:
-//                    cout << "Paieska nurodzius varda, pavarde ir miesta" << endl;
-//                    paieskaPagalVardasPavardeMiestas(*adresuKnyga);
-//                    break;
-//                case 6:
-//                    cout << "Rikiavimas pagal pavarde ir miesta" << endl;
-//                    rikiavimasPagalVardasaMiestas(*adresuKnyga);
-//                    //adresuKnyga->exportuotiIFaila(); kontaktu EXPORTAVIMAS i faila
-//
-//                    break;
-//                case 7:
-//                    cout << "Programa baigia darba" << endl;
-//                    break;
-//                default:
-//                    cout << "Pasirinktas variantas negalimas prasau pasirinkti is naujo" << endl;
-//                    break;
-
-
-
-//        String givenFirstName = "Jackson";
-//        String givenLastName = "Johnson";
-//        String givenCity = "Kaunas";
-//
-//        metodai met1 = new metodai();
-//        met1.rikiavimas(knygute);
-//
-//        metodai met2 = new metodai();
-//        met2.cityPopulation(knygute, givenCity);
-//
-//        metodai met3 = new metodai();
-//        met3.searchByFirstNameAndLastName(knygute, givenFirstName, givenLastName);
-//
-//        metodai met4 = new metodai();
-//        met4.searchByFirstNameAndLastNameAndCity(knygute, givenFirstName, givenLastName, givenCity);
-//
-//        metodai met5 = new metodai();
-//        met5.failoNuskaitymas();
-
-
-
-//        for( int i=0; i<10; i++){
-//            System.out.println( "irasomi kontaktai: " + knygute.asmenuKontaktai.get(i).getVardas() + " " + knygute.asmenuKontaktai.get(i).getPavarde()
-//            + " " + knygute.asmenuKontaktai.get(i).getMiestas() + " " + knygute.asmenuKontaktai.get(i).getTelefonas()); }
     }
 
 }
