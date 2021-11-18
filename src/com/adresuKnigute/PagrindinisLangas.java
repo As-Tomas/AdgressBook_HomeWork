@@ -12,10 +12,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.SearchResultsOutput, PaieskaNeModalinisLangas.SearchResultsOutput2{
+class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.SearchResultsOutput, NaujoKontDialogas.KontaktoSukurimas, PaieskaNeModalinisLangas.SearchResultsOutput2{
 
     PaieskaDialog no_modalWindow = new PaieskaDialog(this,false, true);
     PaieskaNeModalinisLangas no_modalSerchWindow = new PaieskaNeModalinisLangas(this,false);
+    NaujoKontDialogas no_modal_ivedimas = new NaujoKontDialogas(this, false);
+
 //    PopUpGenerateNumContacts popUPHovMuchGenerate = new PopUpGenerateNumContacts(this,true);
 
     JTable lentele;//lentele, kur perziurimi failo duomenys
@@ -225,20 +227,23 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
                 break;
 
             case "Paieska":
-                // todo sukurti ne modalini langa
+                // sukurtas modalinis langas
                 no_modalWindow.setVardas();
                 no_modalWindow.setpavarde();
                 no_modalWindow.setMiestas();
                 no_modalWindow.setVisible(true);
 
-
                 statusText.setText("Vikdoma paieska... ");
                 break;
 
             case "Sukurti kontakta":
-                //todo sukurti modalini langa
+                // sukurtas modalinis langas
+                no_modal_ivedimas.setVardas();
+                no_modal_ivedimas.setpavarde();
+                no_modal_ivedimas.setMiestas();
+                no_modal_ivedimas.setTelefonas();
+                no_modal_ivedimas.setVisible(true);
 
-                statusText.setText("Kontakstas sukurtas...");
                 break;
 //            //@NR1
 //            case "Pagal varda ir pavarde":
@@ -282,6 +287,15 @@ class PagrindinisLangas extends JFrame implements ActionListener, PaieskaDialog.
 
     @Override
     public void restoreContacts2() {
+        UiMetods metodas = new UiMetods();
+        metodas.adresatuSarasas(lentelesModelis,knygute);
+    }
+
+    @Override
+    public void irasytiKontakta(String v, String p, String m, String t) {
+        Asmuo asmuo = new Asmuo(v, p, m, t);
+        knygute.irasytiKontakta(asmuo);
+        statusText.setText( "Kontakstas issaugotas " );
         UiMetods metodas = new UiMetods();
         metodas.adresatuSarasas(lentelesModelis,knygute);
     }
